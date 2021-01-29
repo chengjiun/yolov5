@@ -23,6 +23,7 @@ from tqdm import tqdm
 from utils.general import xyxy2xywh, xywh2xyxy, xywhn2xyxy, clean_str
 from utils.torch_utils import torch_distributed_zero_first
 
+
 # Parameters
 help_url = 'https://github.com/ultralytics/yolov5/wiki/Train-Custom-Data'
 img_formats = ['bmp', 'jpg', 'jpeg', 'png', 'tif', 'tiff', 'dng']  # acceptable image suffixes
@@ -288,6 +289,7 @@ class LoadStreams:  # multiple IP or RTSP cameras
         self.rect = np.unique(s, axis=0).shape[0] == 1  # rect inference if all shapes equal
         if not self.rect:
             print('WARNING: Different stream shapes detected. For optimal performance supply similarly-shaped streams.')
+        print('dataset LoadStream init -------', flush=True)
 
     def update(self, index, cap):
         # Read next stream frame in a daemon thread
@@ -308,6 +310,7 @@ class LoadStreams:  # multiple IP or RTSP cameras
     def __next__(self):
         self.count += 1
         img0 = self.imgs.copy()
+
         if cv2.waitKey(1) == ord('q'):  # q to quit
             cv2.destroyAllWindows()
             raise StopIteration
@@ -321,7 +324,6 @@ class LoadStreams:  # multiple IP or RTSP cameras
         # Convert
         img = img[:, :, :, ::-1].transpose(0, 3, 1, 2)  # BGR to RGB, to bsx3x416x416
         img = np.ascontiguousarray(img)
-
         return self.sources, img, img0, None
 
     def __len__(self):

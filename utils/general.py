@@ -18,8 +18,12 @@ import torchvision
 import yaml
 
 from utils.google_utils import gsutil_getsize
-from utils.metrics import fitness
 from utils.torch_utils import init_torch_seeds
+
+def fitness(x):
+    # Model fitness as a weighted combination of metrics
+    w = [0.0, 0.0, 0.1, 0.9]  # weights for [P, R, mAP@0.5, mAP@0.5:0.95]
+    return (x[:, :4] * w).sum(1)
 
 # Settings
 torch.set_printoptions(linewidth=320, precision=5, profile='long')

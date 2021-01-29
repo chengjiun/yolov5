@@ -10,7 +10,7 @@ from PIL import Image, ImageDraw
 
 from utils.datasets import letterbox
 from utils.general import non_max_suppression, make_divisible, scale_coords, xyxy2xywh
-from utils.plots import color_list
+# from utils.plots import color_list
 
 
 def autopad(k, p=None):  # kernel, padding
@@ -242,6 +242,7 @@ class Detections:
         self.n = len(self.pred)
 
     def display(self, pprint=False, show=False, save=False, render=False):
+        from utils.plots import color_list
         colors = color_list()
         for i, (img, pred) in enumerate(zip(self.imgs, self.pred)):
             str = f'image {i + 1}/{len(self.pred)}: {img.shape[0]}x{img.shape[1]} '
