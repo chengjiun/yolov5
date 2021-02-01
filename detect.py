@@ -125,6 +125,8 @@ def detect(save_img=False):
                 # width=1024
                 #dim =(width, int(h* width /float(w)))
                 #im0r = cv2.resize(im0, dim, interpolation=cv2.INTER_CUBIC)
+                if self.opt.mirror:
+                    im0 = cv2.flip(im0, 1)
                 cv2.imshow('yolov4', im0)
                 if cv2.waitKey(1) & 0xFF == ord('q'):
                     break
@@ -171,6 +173,7 @@ if __name__ == '__main__':
     parser.add_argument('--project', default='runs/detect', help='save results to project/name')
     parser.add_argument('--name', default='exp', help='save results to project/name')
     parser.add_argument('--exist-ok', action='store_true', help='existing project/name ok, do not increment')
+    parser.add_argument('--mirror', action='store_true', help='display the flipped image')
     opt = parser.parse_args()
     print(opt)
     check_requirements()
