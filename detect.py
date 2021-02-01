@@ -125,7 +125,7 @@ def detect(save_img=False):
                 # width=1024
                 #dim =(width, int(h* width /float(w)))
                 #im0r = cv2.resize(im0, dim, interpolation=cv2.INTER_CUBIC)
-                if self.opt.mirror:
+                if opt.mirror:
                     im0 = cv2.flip(im0, 1)
                 cv2.imshow('yolov4', im0)
                 if cv2.waitKey(1) & 0xFF == ord('q'):
