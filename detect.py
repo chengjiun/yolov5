@@ -48,7 +48,7 @@ def detect(save_img=False):
         cudnn.benchmark = True  # set True to speed up constant image size inference
         dataset = LoadStreams(source, img_size=imgsz)
         cv2.namedWindow('yolov4',cv2.WINDOW_NORMAL)
-        cv2.resizeWindow('yolov4', 1024,1024)
+        cv2.resizeWindow('yolov4', 1440, int(1440/4*3))
 
     else:
         save_img = True
