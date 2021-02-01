@@ -46,7 +46,7 @@ def detect(save_img=False):
     if webcam:
         view_img = True
         cudnn.benchmark = True  # set True to speed up constant image size inference
-        dataset = LoadStreams(source, img_size=imgsz)
+        dataset = LoadStreams(source, img_size=imgsz, mirror=opt.mirror)
         cv2.namedWindow('yolov4',cv2.WINDOW_NORMAL)
         cv2.resizeWindow('yolov4', 1440, int(1440/4*3))
 
@@ -125,8 +125,6 @@ def detect(save_img=False):
                 # width=1024
                 #dim =(width, int(h* width /float(w)))
                 #im0r = cv2.resize(im0, dim, interpolation=cv2.INTER_CUBIC)
-                if opt.mirror:
-                    im0 = cv2.flip(im0, 1)
                 cv2.imshow('yolov4', im0)
                 if cv2.waitKey(1) & 0xFF == ord('q'):
                     break
@@ -176,7 +174,7 @@ if __name__ == '__main__':
     parser.add_argument('--mirror', action='store_true', help='display the flipped image')
     opt = parser.parse_args()
     print(opt)
-    check_requirements()
+    # check_requirements()
 
     with torch.no_grad():
         if opt.update:  # update all models (to fix SourceChangeWarning)

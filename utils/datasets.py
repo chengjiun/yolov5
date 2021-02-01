@@ -257,10 +257,10 @@ class LoadWebcam:  # for inference
 
 
 class LoadStreams:  # multiple IP or RTSP cameras
-    def __init__(self, sources='streams.txt', img_size=640):
+    def __init__(self, sources='streams.txt', img_size=640, mirror=False):
         self.mode = 'stream'
         self.img_size = img_size
-
+        self.mirror = mirror
         if os.path.isfile(sources):
             with open(sources, 'r') as f:
                 sources = [x.strip() for x in f.read().strip().splitlines() if len(x.strip())]
@@ -314,14 +314,16 @@ class LoadStreams:  # multiple IP or RTSP cameras
     def __next__(self):
         self.count += 1
         img0 = self.imgs.copy()
-
+        if self.mirror: 
+            #### SLOW; TO BE FIXED
+            img0 = [cv2.flip(x, 1) for x in img0]
         if cv2.waitKey(1) == ord('q'):  # q to quit
             cv2.destroyAllWindows()
             raise StopIteration
 
         # Letterbox
         img = [letterbox(x, new_shape=self.img_size, auto=self.rect)[0] for x in img0]
-
+        
         # Stack
         img = np.stack(img, 0)
 
