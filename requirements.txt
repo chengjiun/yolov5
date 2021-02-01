@@ -6,12 +6,12 @@ matplotlib>=3.2.2
 numpy>=1.18.5
 #opencv-python>=4.1.2
 Pillow
-PyYAML>=5.3.1
+PyYAML
 scipy>=1.4.1
 tensorboard>=2.2
 torch>=1.7.0
-torchvision>=0.8.0
-qdm>=4.41.0
+torchvision
+tqdm>=4.41.0
 
 # logging -------------------------------------
 # wandb

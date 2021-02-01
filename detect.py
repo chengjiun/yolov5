@@ -47,6 +47,9 @@ def detect(save_img=False):
         view_img = True
         cudnn.benchmark = True  # set True to speed up constant image size inference
         dataset = LoadStreams(source, img_size=imgsz)
+        cv2.namedWindow('yolov4',cv2.WINDOW_NORMAL)
+        cv2.resizeWindow('yolov4', 1024,1024)
+
     else:
         save_img = True
         dataset = LoadImages(source, img_size=imgsz)
@@ -118,7 +121,11 @@ def detect(save_img=False):
 
             # Stream results
             if view_img:
-                cv2.imshow(str(p), im0)
+                #(h, w) = im0.shape[:2]
+                # width=1024
+                #dim =(width, int(h* width /float(w)))
+                #im0r = cv2.resize(im0, dim, interpolation=cv2.INTER_CUBIC)
+                cv2.imshow('yolov4', im0)
                 if cv2.waitKey(1) & 0xFF == ord('q'):
                     break
 
