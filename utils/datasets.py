@@ -278,7 +278,7 @@ class LoadStreams:  # multiple IP or RTSP cameras
             # possible configurtion for 1080p camera:
             # 1280x720x10fps, 960x720x15fps, 640x480x30fps
             cap.set(cv2.CAP_PROP_FRAME_WIDTH, 960) # 1080p camera
-            cap.set(cv2.CAP_PROP_FRAME_HEIGHT, 720) # 
+            cap.set(cv2.CAP_PROP_FRAME_HEIGHT, 720) #
             w = int(cap.get(cv2.CAP_PROP_FRAME_WIDTH))
             h = int(cap.get(cv2.CAP_PROP_FRAME_HEIGHT)) 
             fps = cap.get(cv2.CAP_PROP_FPS) % 100
