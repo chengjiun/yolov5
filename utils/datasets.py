@@ -277,7 +277,7 @@ class LoadStreams:  # multiple IP or RTSP cameras
             assert cap.isOpened(), f'Failed to open {s}'
             # possible configurtion for 1080p camera:
             # use "v4l2-ctl --list-formats-ext" to check available configuration
-            # 1280x720x10fps, 960x720x15fps, 640x480x30fps
+            # 1280x720x10fps, 960x720x15fps, 640x480x30fps --> YUVU
             cap.set(cv2.CAP_PROP_FRAME_WIDTH, 960) # 1080p camera
             cap.set(cv2.CAP_PROP_FRAME_HEIGHT, 720) #
             w = int(cap.get(cv2.CAP_PROP_FRAME_WIDTH))
