@@ -276,6 +276,7 @@ class LoadStreams:  # multiple IP or RTSP cameras
             cap = cv2.VideoCapture(eval(s) if s.isnumeric() else s)
             assert cap.isOpened(), f'Failed to open {s}'
             # possible configurtion for 1080p camera:
+            # use "v4l2-ctl --list-formats-ext" to check available configuration
             # 1280x720x10fps, 960x720x15fps, 640x480x30fps
             cap.set(cv2.CAP_PROP_FRAME_WIDTH, 960) # 1080p camera
             cap.set(cv2.CAP_PROP_FRAME_HEIGHT, 720) #
